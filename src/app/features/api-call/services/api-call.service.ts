@@ -23,7 +23,7 @@ export class ApiCallService {
 
         return Object.entries(postsByUser).map(([userId, userPosts]) => ({
           userId: Number(userId),
-          posts: userPosts.slice(0, 4),
+          posts: userPosts,
         }));
       }),
     );
