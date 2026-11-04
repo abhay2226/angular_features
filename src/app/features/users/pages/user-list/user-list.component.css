@@ -1,0 +1,17 @@
+.user-list {
+  max-width: 760px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.selection {
+  margin-top: 1.5rem;
+}

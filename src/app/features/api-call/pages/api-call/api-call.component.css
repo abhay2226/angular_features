@@ -1,0 +1,58 @@
+main {
+  max-width: 48rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.user-groups {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.user-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.user-filter select {
+  padding: 0.4rem;
+}
+
+.user-accordion {
+  border: 1px solid #d5dbe3;
+  border-radius: 0.5rem;
+  background: white;
+}
+
+.user-accordion summary {
+  padding: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.user-accordion summary:focus-visible {
+  outline: 3px solid #7ea9e8;
+  outline-offset: 2px;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0 1rem 1rem;
+  list-style: none;
+}
+
+li {
+  padding: 1rem;
+  border: 1px solid #d5dbe3;
+  border-radius: 0.5rem;
+}
+
+li h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}

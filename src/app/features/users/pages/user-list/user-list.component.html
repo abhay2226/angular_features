@@ -1,0 +1,19 @@
+<main class="user-list">
+  <h1>Team members</h1>
+  <p>Select a card to send its user back to the parent list.</p>
+
+  <section class="cards" aria-label="Team members">
+    @for (user of users; track user.id) {
+      <app-user-card
+        [user]="user"
+        (userSelected)="onUserSelected($event)"
+      />
+    }
+  </section>
+
+  @if (selectedUser; as user) {
+    <p class="selection" aria-live="polite">
+      Selected: <strong>{{ user.name }}</strong> — {{ user.role }}
+    </p>
+  }
+</main>

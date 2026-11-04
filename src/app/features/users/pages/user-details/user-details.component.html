@@ -1,0 +1,7 @@
+<h1>User details</h1>
+@if (userName) {
+  <p>Showing details for <strong>{{ userName }}</strong>.</p>
+} @else {
+  <p role="alert">No user name was provided in the route.</p>
+}
+<a routerLink="/features/users">Back to users</a>

@@ -1,0 +1,41 @@
+<main>
+  <h1>Posts from the sample API</h1>
+
+  @if (isLoading) {
+    <p>Loading posts...</p>
+  } @else if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+  } @else if (postsByUser.length === 0) {
+    <p>No posts were returned by the API.</p>
+  } @else {
+    <div class="user-filter">
+      <label for="user-filter">Filter by user ID:</label>
+      <select id="user-filter" [(ngModel)]="selectedUserId">
+        <option [ngValue]="null">All users</option>
+        @for (group of postsByUser; track group.userId) {
+          <option [ngValue]="group.userId">User {{ group.userId }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="user-groups">
+      @for (group of filteredPostsByUser; track group.userId) {
+        <details class="user-accordion">
+          <summary>
+            User {{ group.userId }} ({{ group.posts.length }} posts)
+          </summary>
+          <ul class="posts" [attr.aria-label]="'Posts by user ' + group.userId">
+            @for (post of group.posts; track post.id) {
+              <li>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body }}</p>
+              </li>
+            }
+          </ul>
+        </details>
+      } @empty {
+        <p>No posts found for this user.</p>
+      }
+    </div>
+  }
+</main>

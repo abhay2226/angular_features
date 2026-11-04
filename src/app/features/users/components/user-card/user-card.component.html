@@ -1,0 +1,8 @@
+<article class="user-card">
+  <h2>{{ user.name }}</h2>
+  <p>{{ user.role }}</p>
+  <button type="button" (click)="userSelected.emit(user)">
+    Select {{ user.name }}
+  </button>
+  <a [routerLink]="['/features/users', user.name]">View details</a>
+</article>

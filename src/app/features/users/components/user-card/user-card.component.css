@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.user-card {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid #d5dbe3;
+  border-radius: 0.5rem;
+}
+
+.user-card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.user-card button {
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: #2459a6;
+  color: white;
+  cursor: pointer;
+}
+
+.user-card button:focus-visible {
+  outline: 3px solid #7ea9e8;
+  outline-offset: 2px;
+}
