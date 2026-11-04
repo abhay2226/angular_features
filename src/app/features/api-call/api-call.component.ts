@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApiCallService } from '../../services/api-call.service';
-import { UserPosts } from '../../models/post.model';
+import { RouterLink } from '@angular/router';
+import { ApiCallService } from './services/api-call.service';
+import { UserPosts } from './models/post.model';
 
 @Component({
   selector: 'app-api-call',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './api-call.component.html',
   styleUrl: './api-call.component.css',
 })
