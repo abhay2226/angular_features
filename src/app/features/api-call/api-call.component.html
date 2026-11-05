@@ -10,7 +10,11 @@
   } @else {
     <div class="user-filter">
       <label for="user-filter">Filter by user ID:</label>
-      <select id="user-filter" [(ngModel)]="selectedUserId">
+      <select
+        id="user-filter"
+        [ngModel]="selectedUserId === -1 ? null : selectedUserId"
+        (ngModelChange)="onUserFilterChange($event)"
+      >
         <option [ngValue]="null">All users</option>
         @for (group of postsByUser; track group.userId) {
           <option [ngValue]="group.userId">User {{ group.userId }}</option>
@@ -20,7 +24,11 @@
 
     <div class="user-groups">
       @for (group of filteredPostsByUser; track group.userId) {
-        <details class="user-accordion">
+        <details
+          class="user-accordion"
+          [open]="selectedUserId === group.userId"
+          (toggle)="onAccordionToggle($event, group.userId)"
+        >
           <summary>
             User {{ group.userId }} ({{ group.posts.length }} posts)
           </summary>

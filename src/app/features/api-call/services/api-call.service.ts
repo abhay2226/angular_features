@@ -13,6 +13,13 @@ export class ApiCallService {
     return this.http.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
   }
 
+  getPostsByUserId(userId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      'https://jsonplaceholder.typicode.com/posts',
+      { params: { userId: userId.toString() } },
+    );
+  }
+
   getPostsGroupedByUser(): Observable<UserPosts[]> {
     return this.getPosts().pipe(
       map((posts) => {
