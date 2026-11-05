@@ -7,14 +7,16 @@ import { RouterLink } from '@angular/router';
   template: `
     <section>
       <h1>Home</h1>
-      <p>Choose a route:</p>
+      <p>Choose a user to view their posts:</p>
       <ul>
-        <li><a routerLink="/user/1">/user/1</a></li>
-        <li><a routerLink="/user/2">/user/2</a></li>
-        <li><a routerLink="/user/3">/user/3</a></li>
-        <li><a routerLink="/feature/api">/feature/api</a> — API posts</li>
+        <li><a routerLink="/users/api">/users/api</a> — All users' posts</li>
+        @for (userId of userIds; track userId) {
+          <li><a [routerLink]="['/users', userId]">User {{ userId }}</a></li>
+        }
       </ul>
     </section>
   `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  readonly userIds = Array.from({ length: 10 }, (_, index) => index + 1);
+}

@@ -14,10 +14,17 @@ main {
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.user-filter input,
+.user-filter select,
+.user-filter button {
+  padding: 0.4rem;
 }
 
 .user-filter select {
-  padding: 0.4rem;
+  min-width: 6rem;
 }
 
 .user-accordion {

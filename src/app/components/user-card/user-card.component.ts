@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { User } from '../../../features/users/models/user.model';
+import { User } from '../../features/users/models/user.model';
 
 @Component({
   selector: 'app-user-card',
