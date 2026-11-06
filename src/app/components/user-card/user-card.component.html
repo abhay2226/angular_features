@@ -4,5 +4,5 @@
   <button type="button" (click)="userSelected.emit(user)">
     Select {{ user.name }}
   </button>
-  <a [routerLink]="['/user', user.id]">View details</a>
+  <a [routerLink]="['/users', user.id]">View details</a>
 </article>

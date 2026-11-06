@@ -82,6 +82,6 @@ export class ApiCallComponent implements OnInit {
   }
 
   private navigateToUser(userId: number | null): void {
-    void this.router.navigate(userId === null ? ['/users/api'] : ['/users', userId]);
+    void this.router.navigate(userId === null ? ['/api-call'] : ['/api-call', userId]);
   }
 }

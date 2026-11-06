@@ -7,11 +7,12 @@ import { RouterLink } from '@angular/router';
   template: `
     <section>
       <h1>Home</h1>
+      <p><a routerLink="/examples/template-features">Template features</a></p>
       <p>Choose a user to view their posts:</p>
       <ul>
-        <li><a routerLink="/users/api">/users/api</a> — All users' posts</li>
+        <li><a routerLink="/api-call">/api-call</a> — All users' posts</li>
         @for (userId of userIds; track userId) {
-          <li><a [routerLink]="['/users', userId]">User {{ userId }}</a></li>
+          <li><a [routerLink]="['/api-call', userId]">Posts for user {{ userId }}</a></li>
         }
       </ul>
     </section>

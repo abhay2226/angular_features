@@ -1,0 +1,41 @@
+<main class="examples">
+  <h1>Angular template examples</h1>
+
+  <section aria-labelledby="two-way-binding-heading">
+    <h2 id="two-way-binding-heading">Two-way binding with ngModel</h2>
+    <label for="live-text">Type some text:</label>
+    <input
+      id="live-text"
+      type="text"
+      [(ngModel)]="typedText"
+      placeholder="Your text appears below"
+    >
+    <p aria-live="polite">Live preview: {{ typedText || 'Nothing typed yet.' }}</p>
+  </section>
+
+  <section aria-labelledby="dynamic-styling-heading">
+    <h2 id="dynamic-styling-heading">Dynamic styling with ngStyle</h2>
+    <label for="box-color">Choose a box color:</label>
+    <select id="box-color" [(ngModel)]="boxColor">
+      <option value="lightblue">Blue</option>
+      <option value="lightgreen">Green</option>
+      <option value="lightcoral">Coral</option>
+    </select>
+    <div class="color-box" [ngStyle]="{ 'background-color': boxColor }">
+      The selected color is applied to this box.
+    </div>
+  </section>
+
+  <section aria-labelledby="content-projection-heading">
+    <h2 id="content-projection-heading">Content projection with ng-content</h2>
+    <app-content-card>
+      <h3>Parent-provided heading</h3>
+      <p>
+        This content is written in the parent template and projected into the
+        child card at its ng-content slot.
+      </p>
+    </app-content-card>
+  </section>
+
+  <a routerLink="/">Go back to home</a>
+</main>
