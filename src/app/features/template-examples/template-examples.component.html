@@ -26,6 +26,37 @@
     </div>
   </section>
 
+  <section aria-labelledby="toggle-heading">
+    <h2 id="toggle-heading">Toggle content visibility</h2>
+    <button
+      type="button"
+      aria-controls="toggle-paragraph"
+      [attr.aria-expanded]="showParagraph"
+      (click)="showParagraph = !showParagraph"
+    >
+      {{ showParagraph ? 'Hide' : 'Show' }} paragraph
+    </button>
+    @if (showParagraph) {
+      <p id="toggle-paragraph">This paragraph is shown or hidden with a toggle.</p>
+    }
+
+    <label for="toggle-password">Password:</label>
+    <input
+      id="toggle-password"
+      [type]="showPassword ? 'text' : 'password'"
+      [(ngModel)]="password"
+      autocomplete="current-password"
+    >
+    <button
+      type="button"
+      aria-controls="toggle-password"
+      [attr.aria-pressed]="showPassword"
+      (click)="showPassword = !showPassword"
+    >
+      {{ showPassword ? 'Hide' : 'Show' }} password
+    </button>
+  </section>
+
   <section aria-labelledby="content-projection-heading">
     <h2 id="content-projection-heading">Content projection with ng-content</h2>
     <app-content-card>
@@ -35,6 +66,72 @@
         child card at its ng-content slot.
       </p>
     </app-content-card>
+  </section>
+
+  <h2 id="names-table-heading">Search, sort, and paginate names</h2>
+  <div class="search-sticky" role="search" aria-labelledby="names-table-heading">
+    <label for="name-search">Search names:</label>
+    <input
+      id="name-search"
+      type="search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Type a name"
+    >
+  </div>
+
+  <section aria-labelledby="names-table-heading">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" [attr.aria-sort]="sortDirection === 'asc' ? 'ascending' : 'descending'">
+              <button type="button" class="sort-button" (click)="toggleNameSort()">
+                Name
+                <span aria-hidden="true">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (name of pageNames; track name; let index = $index) {
+            <tr>
+              <td>{{ currentPage * pageSize + index + 1 }}</td>
+              <td>{{ name }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="2">No matching names found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination" aria-label="Table pagination">
+      <button type="button" (click)="previousPage()" [disabled]="currentPage === 0">
+        Previous
+      </button>
+      <span aria-live="polite">
+        Page {{ totalPages === 0 ? 0 : currentPage + 1 }} of {{ totalPages }}
+      </span>
+      <button
+        type="button"
+        (click)="nextPage()"
+        [disabled]="currentPage >= totalPages - 1"
+      >
+        Next
+      </button>
+    </div>
+  </section>
+
+  <section aria-labelledby="counter-heading">
+    <h2 id="counter-heading">Counter component</h2>
+    <p>Count: <output aria-live="polite">{{ count() }}</output></p>
+    <app-action-button label="Increment" (buttonClick)="increment()" />
+    <app-action-button label="Decrement" (buttonClick)="decrement()" />
+    <app-action-button label="Reset" (buttonClick)="resetCount()" />
   </section>
 
   <a routerLink="/">Go back to home</a>
