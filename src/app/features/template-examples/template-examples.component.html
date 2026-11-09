@@ -1,0 +1,138 @@
+<main class="examples">
+  <h1>Angular template examples</h1>
+
+  <section aria-labelledby="two-way-binding-heading">
+    <h2 id="two-way-binding-heading">Two-way binding with ngModel</h2>
+    <label for="live-text">Type some text:</label>
+    <input
+      id="live-text"
+      type="text"
+      [(ngModel)]="typedText"
+      placeholder="Your text appears below"
+    >
+    <p aria-live="polite">Live preview: {{ typedText || 'Nothing typed yet.' }}</p>
+  </section>
+
+  <section aria-labelledby="dynamic-styling-heading">
+    <h2 id="dynamic-styling-heading">Dynamic styling with ngStyle</h2>
+    <label for="box-color">Choose a box color:</label>
+    <select id="box-color" [(ngModel)]="boxColor">
+      <option value="lightblue">Blue</option>
+      <option value="lightgreen">Green</option>
+      <option value="lightcoral">Coral</option>
+    </select>
+    <div class="color-box" [ngStyle]="{ 'background-color': boxColor }">
+      The selected color is applied to this box.
+    </div>
+  </section>
+
+  <section aria-labelledby="toggle-heading">
+    <h2 id="toggle-heading">Toggle content visibility</h2>
+    <button
+      type="button"
+      aria-controls="toggle-paragraph"
+      [attr.aria-expanded]="showParagraph"
+      (click)="showParagraph = !showParagraph"
+    >
+      {{ showParagraph ? 'Hide' : 'Show' }} paragraph
+    </button>
+    @if (showParagraph) {
+      <p id="toggle-paragraph">This paragraph is shown or hidden with a toggle.</p>
+    }
+
+    <label for="toggle-password">Password:</label>
+    <input
+      id="toggle-password"
+      [type]="showPassword ? 'text' : 'password'"
+      [(ngModel)]="password"
+      autocomplete="current-password"
+    >
+    <button
+      type="button"
+      aria-controls="toggle-password"
+      [attr.aria-pressed]="showPassword"
+      (click)="showPassword = !showPassword"
+    >
+      {{ showPassword ? 'Hide' : 'Show' }} password
+    </button>
+  </section>
+
+  <section aria-labelledby="content-projection-heading">
+    <h2 id="content-projection-heading">Content projection with ng-content</h2>
+    <app-content-card>
+      <h3>Parent-provided heading</h3>
+      <p>
+        This content is written in the parent template and projected into the
+        child card at its ng-content slot.
+      </p>
+    </app-content-card>
+  </section>
+
+  <h2 id="names-table-heading">Search, sort, and paginate names</h2>
+  <div class="search-sticky" role="search" aria-labelledby="names-table-heading">
+    <label for="name-search">Search names:</label>
+    <input
+      id="name-search"
+      type="search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Type a name"
+    >
+  </div>
+
+  <section aria-labelledby="names-table-heading">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" [attr.aria-sort]="sortDirection === 'asc' ? 'ascending' : 'descending'">
+              <button type="button" class="sort-button" (click)="toggleNameSort()">
+                Name
+                <span aria-hidden="true">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (name of pageNames; track name; let index = $index) {
+            <tr>
+              <td>{{ currentPage * pageSize + index + 1 }}</td>
+              <td>{{ name }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="2">No matching names found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination" aria-label="Table pagination">
+      <button type="button" (click)="previousPage()" [disabled]="currentPage === 0">
+        Previous
+      </button>
+      <span aria-live="polite">
+        Page {{ totalPages === 0 ? 0 : currentPage + 1 }} of {{ totalPages }}
+      </span>
+      <button
+        type="button"
+        (click)="nextPage()"
+        [disabled]="currentPage >= totalPages - 1"
+      >
+        Next
+      </button>
+    </div>
+  </section>
+
+  <section aria-labelledby="counter-heading">
+    <h2 id="counter-heading">Counter component</h2>
+    <p>Count: <output aria-live="polite">{{ count() }}</output></p>
+    <app-action-button label="Increment" (buttonClick)="increment()" />
+    <app-action-button label="Decrement" (buttonClick)="decrement()" />
+    <app-action-button label="Reset" (buttonClick)="resetCount()" />
+  </section>
+
+  <a routerLink="/">Go back to home</a>
+</main>
