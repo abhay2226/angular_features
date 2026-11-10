@@ -134,5 +134,42 @@
     <app-action-button label="Reset" (buttonClick)="resetCount()" />
   </section>
 
+  <section aria-labelledby="binding-examples-heading">
+    <h2 id="binding-examples-heading">Interpolation and property/event binding</h2>
+    <p>
+      My name is {{ profileName }}, I am {{ profileAge }} years old, and I live in
+      {{ profileCity }}.
+    </p>
+
+    <img class="binding-image" [src]="imageSrc" alt="Angular favicon">
+
+    <button type="button" [disabled]="buttonDisabled" (click)="showClickMessage()">
+      Click to update the message
+    </button>
+    <button type="button" (click)="buttonDisabled = !buttonDisabled">
+      {{ buttonDisabled ? 'Enable' : 'Disable' }} the message button
+    </button>
+    <p aria-live="polite">{{ eventMessage }}</p>
+  </section>
+
+  <section aria-labelledby="greeting-heading">
+    <h2 id="greeting-heading">Create a greeting</h2>
+    <label for="greeting-name">Your name:</label>
+    <input
+      id="greeting-name"
+      type="text"
+      [(ngModel)]="greetingName"
+      placeholder="Type your name"
+    >
+    <button
+      type="button"
+      [disabled]="!greetingName.trim()"
+      (click)="showGreeting()"
+    >
+      Say hello
+    </button>
+    <p aria-live="polite">{{ greetingMessage }}</p>
+  </section>
+
   <a routerLink="/">Go back to home</a>
 </main>
