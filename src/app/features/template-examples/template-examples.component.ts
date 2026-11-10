@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ActionButtonComponent } from '../../components/action-button/action-button.component';
@@ -8,7 +8,15 @@ import { ContentCardComponent } from '../../components/content-card/content-card
 @Component({
   selector: 'app-template-examples',
   standalone: true,
-  imports: [ActionButtonComponent, ContentCardComponent, FormsModule, NgStyle, RouterLink],
+  imports: [
+    ActionButtonComponent,
+    ContentCardComponent,
+    FormsModule,
+    NgIf,
+    NgStyle,
+    NgTemplateOutlet,
+    RouterLink,
+  ],
   templateUrl: './template-examples.component.html',
   styleUrl: './template-examples.component.css',
 })
@@ -16,7 +24,7 @@ export class TemplateExamplesComponent {
   readonly profileName = 'Alex';
   readonly profileAge = 28;
   readonly profileCity = 'Toronto';
-  readonly imageSrc = '/favicon.ico';
+  readonly imageSrc = '/profile-icon.svg';
   buttonDisabled = false;
   eventMessage = 'The button has not been clicked yet.';
   greetingName = '';
@@ -24,6 +32,7 @@ export class TemplateExamplesComponent {
   typedText = '';
   boxColor = 'lightblue';
   showParagraph = true;
+  showPrimaryContent = true;
   showPassword = false;
   password = '';
   searchText = '';

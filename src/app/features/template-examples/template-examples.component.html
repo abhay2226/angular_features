@@ -141,7 +141,7 @@
       {{ profileCity }}.
     </p>
 
-    <img class="binding-image" [src]="imageSrc" alt="Angular favicon">
+    <img class="binding-image" [src]="imageSrc" alt="Profile icon">
 
     <button type="button" [disabled]="buttonDisabled" (click)="showClickMessage()">
       Click to update the message
@@ -169,6 +169,45 @@
       Say hello
     </button>
     <p aria-live="polite">{{ greetingMessage }}</p>
+  </section>
+
+  <section aria-labelledby="ng-template-heading">
+    <h2 id="ng-template-heading">Reusable template with ng-template</h2>
+    <button
+      type="button"
+      [attr.aria-expanded]="showPrimaryContent"
+      (click)="showPrimaryContent = !showPrimaryContent"
+    >
+      Show {{ showPrimaryContent ? 'fallback template' : 'main content' }}
+    </button>
+    <p *ngIf="showPrimaryContent; else conditionFallback">
+      This is the main content shown while the condition is true.
+    </p>
+    <ng-template #conditionFallback>
+      <p>This fallback template appears while the condition is false.</p>
+    </ng-template>
+
+    <ng-template #noticeTemplate let-title="title" let-message="message">
+      <article class="template-notice">
+        <h3>{{ title }}</h3>
+        <p>{{ message }}</p>
+      </article>
+    </ng-template>
+
+    <ng-container
+      [ngTemplateOutlet]="noticeTemplate"
+      [ngTemplateOutletContext]="{
+        title: 'Reusable content',
+        message: 'This content is rendered from an ng-template.'
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="noticeTemplate"
+      [ngTemplateOutletContext]="{
+        title: 'Different data',
+        message: 'The same template can display different values.'
+      }"
+    />
   </section>
 
   <a routerLink="/">Go back to home</a>
