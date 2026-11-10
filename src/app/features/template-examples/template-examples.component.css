@@ -92,3 +92,16 @@
   height: 3rem;
   margin: 0.75rem 0;
 }
+
+.template-notice {
+  max-width: 32rem;
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #2459a6;
+  background: #f3f5f7;
+}
+
+.template-notice h3,
+.template-notice p {
+  margin: 0.25rem 0;
+}
