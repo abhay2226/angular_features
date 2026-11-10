@@ -16,7 +16,7 @@ export class TemplateExamplesComponent {
   readonly profileName = 'Alex';
   readonly profileAge = 28;
   readonly profileCity = 'Toronto';
-  readonly imageSrc = '/favicon.ico';
+  readonly imageSrc = '/profile-icon.svg';
   buttonDisabled = false;
   eventMessage = 'The button has not been clicked yet.';
   greetingName = '';
