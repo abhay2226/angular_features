@@ -13,6 +13,14 @@ import { ContentCardComponent } from '../../components/content-card/content-card
   styleUrl: './template-examples.component.css',
 })
 export class TemplateExamplesComponent {
+  readonly profileName = 'Alex';
+  readonly profileAge = 28;
+  readonly profileCity = 'Toronto';
+  readonly imageSrc = '/favicon.ico';
+  buttonDisabled = false;
+  eventMessage = 'The button has not been clicked yet.';
+  greetingName = '';
+  greetingMessage = '';
   typedText = '';
   boxColor = 'lightblue';
   showParagraph = true;
@@ -90,5 +98,13 @@ export class TemplateExamplesComponent {
 
   resetCount(): void {
     this.count.set(0);
+  }
+
+  showClickMessage(): void {
+    this.eventMessage = 'The button was clicked!';
+  }
+
+  showGreeting(): void {
+    this.greetingMessage = `Hello, ${this.greetingName.trim()}!`;
   }
 }
