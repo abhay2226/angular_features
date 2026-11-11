@@ -1,0 +1,71 @@
+.employee-data {
+  padding: 1.5rem;
+}
+
+.data-status {
+  background-color: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+}
+
+.data-status.error {
+  background-color: #ffebee;
+  border-left-color: #c62828;
+}
+
+.data-status.empty {
+  background-color: #fff8e1;
+  border-left-color: #ed6c02;
+}
+
+.error-test-button {
+  margin: 0.5rem 0;
+  padding: 0.45rem 0.75rem;
+}
+
+.table-controls,
+.pagination {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.table-controls select {
+  padding: 0.4rem;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 900px;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #d5d9de;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f4f7;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 0.45rem 0.8rem;
+}

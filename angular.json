@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "employees.json",
+                "input": "utils",
+                "output": "assets"
               }
             ],
             "styles": [

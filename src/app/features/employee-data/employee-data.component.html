@@ -1,0 +1,110 @@
+<main class="employee-data">
+  <h1>Employee data</h1>
+  <button
+    type="button"
+    class="error-test-button"
+    (click)="testBadRequest()"
+    [disabled]="isLoading"
+  >
+    Test HTTP 400 error
+  </button>
+
+  @if (isLoading) {
+    <ng-container [ngTemplateOutlet]="loadingStatus" />
+  } @else if (errorMessage) {
+    <ng-container [ngTemplateOutlet]="errorStatus" />
+  } @else if (employees.length === 0) {
+    <p class="data-status empty" role="status">
+      <strong>Data status:</strong> No employee records were found.
+    </p>
+  } @else {
+    <p class="data-status" role="status">
+      <strong>Data status:</strong>
+      Loaded {{ employees.length }} employee records successfully.
+    </p>
+  }
+
+  @if (!isLoading && !errorMessage && employees.length > 0) {
+    <div class="table-controls">
+      <label for="page-size">Employees per page:</label>
+      <select
+        id="page-size"
+        [ngModel]="pageSize"
+        (ngModelChange)="onPageSizeChange($event)"
+      >
+        @for (size of pageSizeOptions; track size) {
+          <option [ngValue]="size">{{ size }}</option>
+        }
+      </select>
+      <span aria-live="polite">
+        Showing {{ firstItemNumber }}–{{ lastItemNumber }} of {{ employees.length }}
+      </span>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Department</th>
+            <th scope="col">City</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Join date</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employee of pageEmployees; track employee.id) {
+            <tr>
+              <td>{{ employee.id }}</td>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.email }}</td>
+              <td>{{ employee.age }}</td>
+              <td>{{ employee.department }}</td>
+              <td>{{ employee.city }}</td>
+              <td>{{ employee.salary | number }}</td>
+              <td>{{ employee.joinDate }}</td>
+              <td>{{ employee.status }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="pagination" aria-label="Employee table pagination">
+      <button type="button" (click)="previousPage()" [disabled]="currentPage === 0">
+        Previous
+      </button>
+      <span aria-live="polite">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+      <button
+        type="button"
+        (click)="nextPage()"
+        [disabled]="currentPage >= totalPages - 1"
+      >
+        Next
+      </button>
+    </nav>
+  }
+
+  <ng-template #loadingStatus>
+    <p class="data-status" role="status" aria-live="polite">
+      <strong>Data status:</strong>
+      {{ isTestingError ? 'Testing HTTP 400 response...' : 'Loading employees...' }}
+    </p>
+  </ng-template>
+
+  <ng-template #errorStatus>
+    <p class="data-status error" role="alert" aria-live="assertive">
+      <strong>Data status:</strong> {{ errorMessage }}
+      @if (errorStatusCode !== null) {
+        (HTTP {{ errorStatusCode }})
+      }
+    </p>
+    <button type="button" (click)="loadEmployees()">Try loading employees again</button>
+  </ng-template>
+
+  <a routerLink="/">Go back to home</a>
+</main>

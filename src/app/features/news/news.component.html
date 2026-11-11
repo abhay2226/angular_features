@@ -1,0 +1,51 @@
+<main class="news-page">
+  <h1>Spaceflight news</h1>
+  <p>Recent articles from the public Spaceflight News API.</p>
+  <button type="button" class="demo-error-button" (click)="testBadRequest()" [disabled]="isLoading">
+    Test HTTP 400 error
+  </button>
+
+  @if (isLoading) {
+    <p class="news-status" role="status">
+      {{ isTestingError ? 'Testing HTTP 400 response...' : 'Loading news stories...' }}
+    </p>
+  } @else if (errorMessage) {
+    <div class="news-status error" role="alert">
+      <p>{{ errorMessage }}</p>
+      @if (errorStatusCode !== null) {
+        <p>HTTP status: {{ errorStatusCode }}</p>
+      }
+      <button type="button" (click)="loadStories()">Try again</button>
+    </div>
+  } @else if (stories.length === 0) {
+    <p class="news-status" role="status">No stories are available right now.</p>
+  } @else {
+    <p class="news-status" role="status">Loaded {{ stories.length }} stories.</p>
+    <ol class="story-list">
+      @for (story of stories; track story.id) {
+        <li>
+          <article>
+            <h2>
+              <a [href]="story.url" target="_blank" rel="noopener noreferrer">
+                {{ story.title }}
+              </a>
+            </h2>
+            <p class="story-details">{{ story.source }}
+              @if (story.publishedAt) {
+                · {{ story.publishedAt | date: 'medium' }}
+              }
+            </p>
+            @if (story.imageUrl) {
+              <img class="story-image" [src]="story.imageUrl" [alt]="story.title" loading="lazy">
+            }
+            @if (story.summary) {
+              <p>{{ story.summary }}</p>
+            }
+          </article>
+        </li>
+      }
+    </ol>
+  }
+
+  <a routerLink="/">Go back to home</a>
+</main>
