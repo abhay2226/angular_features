@@ -7,6 +7,7 @@ import { ApiCallComponent } from './features/api-call/api-call.component';
 import { HomeComponent } from './features/home/home.component';
 import { EmployeeDataComponent } from './features/employee-data/employee-data.component';
 import { NewsComponent } from './features/news/news.component';
+import { NewsCarouselComponent } from './features/news-carousel/news-carousel.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'feature/api', component: ApiCallComponent },
   { path: 'employee-data', component: EmployeeDataComponent },
   { path: 'news', component: NewsComponent },
+  { path: 'news-carousel', component: NewsCarouselComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: '**', component: NotFoundComponent },
 ];

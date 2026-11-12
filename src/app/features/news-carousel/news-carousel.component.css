@@ -1,0 +1,178 @@
+.news-carousel-page {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 1.5rem;
+}
+
+.carousel-header {
+  margin-bottom: 1.5rem;
+}
+
+.carousel-header h1 {
+  margin-top: 0;
+}
+
+.carousel-header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.carousel {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.carousel-card {
+  background-color: #fff;
+  border: 1px solid #d5d9de;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  margin: 0 auto;
+  max-width: 760px;
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-image {
+  background-color: #f1f3f5;
+  display: block;
+  height: min(45vh, 360px);
+  object-fit: cover;
+  width: 100%;
+}
+
+.carousel-card-content {
+  padding: 1.25rem;
+}
+
+.carousel-card h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem;
+}
+
+.carousel-card h2 a {
+  color: inherit;
+}
+
+.carousel-details {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.carousel-arrow {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.carousel-arrow:focus-visible,
+.carousel-card a:focus-visible,
+.carousel-header a:focus-visible {
+  outline: 3px solid #1565c0;
+  outline-offset: 3px;
+}
+
+.carousel-position {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.carousel-loading {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.loading-spinner {
+  animation: spin 0.75s linear infinite;
+  border: 3px solid #d5d9de;
+  border-radius: 50%;
+  border-top-color: #1565c0;
+  flex: 0 0 auto;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.carousel-error {
+  background-color: #ffebee;
+  border-left: 4px solid #c62828;
+  padding: 0.75rem 1rem;
+}
+
+.carousel-empty {
+  padding: 1rem;
+}
+
+.skeleton-card {
+  min-height: 300px;
+}
+
+.skeleton-image,
+.skeleton-line {
+  animation: shimmer 1.4s linear infinite;
+  background: linear-gradient(90deg, #eeeeee 25%, #f7f7f7 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+}
+
+.skeleton-image {
+  height: min(45vh, 360px);
+}
+
+.skeleton-line {
+  border-radius: 0.25rem;
+  display: block;
+  height: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-title {
+  height: 1.25rem;
+  width: 80%;
+}
+
+.skeleton-line-short {
+  width: 50%;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .carousel-card {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .carousel-arrow {
+    grid-row: 2;
+  }
+
+  .carousel-arrow:last-child {
+    justify-self: end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner,
+  .skeleton-image,
+  .skeleton-line {
+    animation: none;
+  }
+}

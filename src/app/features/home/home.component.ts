@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
       <p><a routerLink="/examples/template-features">Template features</a></p>
       <p><a routerLink="/employee-data">Employee data</a></p>
       <p><a routerLink="/news">Spaceflight news</a></p>
+      <p><a routerLink="/news-carousel">Spaceflight news carousel</a></p>
       <p>Choose a user to view their posts:</p>
       <ul>
         <li><a routerLink="/api-call">/api-call</a> — All users' posts</li>

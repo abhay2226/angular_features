@@ -1,0 +1,85 @@
+<main class="news-carousel-page">
+  <header class="carousel-header">
+    <h1>Spaceflight news carousel</h1>
+    <p>Browse articles one card at a time.</p>
+    <nav aria-label="News views">
+      <a routerLink="/">Home</a>
+      <a routerLink="/news">List view</a>
+    </nav>
+  </header>
+
+  @if (isLoading) {
+    <div class="carousel-loading" role="status" aria-live="polite" aria-busy="true">
+      <span class="loading-spinner" aria-hidden="true"></span>
+      {{ totalStories > 0 ? 'Loading more articles...' : 'Loading news articles...' }}
+    </div>
+    <article class="carousel-card skeleton-card" aria-hidden="true">
+      <div class="skeleton-image"></div>
+      <div class="carousel-card-content">
+        <span class="skeleton-line skeleton-title"></span>
+        <span class="skeleton-line"></span>
+        <span class="skeleton-line skeleton-line-short"></span>
+      </div>
+    </article>
+  } @else if (errorMessage) {
+    <div class="carousel-error" role="alert">
+      <p>{{ errorMessage }}</p>
+      @if (errorStatusCode !== null) {
+        <p>HTTP status: {{ errorStatusCode }}</p>
+      }
+      <button type="button" (click)="loadPage()">Try again</button>
+    </div>
+  } @else {
+    @if (currentStory; as story) {
+      <section class="carousel" aria-label="Spaceflight news articles">
+        <button
+          type="button"
+          class="carousel-arrow"
+          (click)="previousStory()"
+          [disabled]="!canGoPrevious"
+          aria-label="Previous article"
+        >
+          Previous
+        </button>
+
+        <article class="carousel-card">
+          @if (story.imageUrl) {
+            <img class="carousel-image" [src]="story.imageUrl" [alt]="story.title" loading="lazy">
+          }
+          <div class="carousel-card-content">
+            <h2>
+              <a [href]="story.url" target="_blank" rel="noopener noreferrer">
+                {{ story.title }}
+              </a>
+            </h2>
+            <p class="carousel-details">
+              {{ story.source }}
+              @if (story.publishedAt) {
+                · {{ story.publishedAt | date: 'medium' }}
+              }
+            </p>
+            @if (story.summary) {
+              <p>{{ story.summary }}</p>
+            }
+          </div>
+        </article>
+
+        <button
+          type="button"
+          class="carousel-arrow"
+          (click)="nextStory()"
+          [disabled]="!canGoNext"
+          aria-label="Next article"
+        >
+          Next
+        </button>
+      </section>
+
+      <p class="carousel-position" role="status" aria-live="polite">
+        Article {{ currentStoryNumber }} of {{ totalStories }}
+      </p>
+    } @else {
+      <p class="carousel-empty" role="status">No news articles are available right now.</p>
+    }
+  }
+</main>
