@@ -1,0 +1,249 @@
+:host {
+  display: block;
+}
+
+.home-page {
+  background:
+    radial-gradient(ellipse at 10% 5%, rgb(37 99 235 / 20%), transparent 35rem),
+    radial-gradient(ellipse at 92% 18%, rgb(124 58 237 / 18%), transparent 32rem),
+    #070b18;
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.home-shell {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.home-hero {
+  margin-bottom: 2rem;
+}
+
+.home-eyebrow,
+.task-kicker {
+  color: #93c5fd;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.home-intro {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  margin: 0.75rem 0 0;
+}
+
+.news-task-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.news-task-card {
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 28%);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  justify-content: space-between;
+  min-height: 300px;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.news-task-card--list {
+  background: linear-gradient(135deg, #10243d, #123b55 58%, #075985);
+}
+
+.news-task-card--carousel {
+  background: linear-gradient(135deg, #20183e, #43246b 58%, #6b2e68);
+}
+
+.news-task-card::before {
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 75%) 1px, transparent 1.5px),
+    radial-gradient(circle, rgb(255 255 255 / 50%) 1px, transparent 1.5px);
+  background-position: 0 0, 18px 24px;
+  background-size: 42px 42px, 63px 63px;
+  content: "";
+  inset: 0;
+  opacity: 0.45;
+  position: absolute;
+  z-index: -1;
+}
+
+.card-planet {
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 50%;
+  height: 15rem;
+  position: absolute;
+  right: -4rem;
+  top: 4rem;
+  transform: rotate(-24deg);
+  width: 15rem;
+  z-index: -1;
+}
+
+.card-planet::before {
+  background: radial-gradient(circle at 32% 28%, #bae6fd, #38bdf8 38%, #075985 76%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 2.5rem rgb(56 189 248 / 45%),
+    inset -1rem -1rem 2rem rgb(7 42 73 / 55%);
+  content: "";
+  height: 10rem;
+  left: 2rem;
+  position: absolute;
+  top: 2rem;
+  width: 10rem;
+}
+
+.news-task-card--carousel .card-planet::before {
+  background: radial-gradient(circle at 32% 28%, #f5d0fe, #c084fc 42%, #6b21a8 78%);
+  box-shadow:
+    0 0 2.5rem rgb(192 132 252 / 45%),
+    inset -1rem -1rem 2rem rgb(59 20 86 / 55%);
+}
+
+.news-task-card:hover {
+  border-color: rgb(255 255 255 / 55%);
+  box-shadow: 0 1.5rem 3.5rem rgb(0 0 0 / 38%);
+  transform: translateY(-4px);
+}
+
+.news-task-card:focus-visible {
+  outline: 3px solid #bfdbfe;
+  outline-offset: 4px;
+}
+
+.task-tag {
+  align-self: flex-start;
+  background-color: rgb(255 255 255 / 12%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  position: relative;
+}
+
+.task-card-content {
+  max-width: 28rem;
+  position: relative;
+}
+
+.task-kicker {
+  color: #bae6fd;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.news-task-card h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 0.65rem;
+}
+
+.task-description {
+  color: #e2e8f0;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 24rem;
+}
+
+.task-action {
+  align-items: center;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.other-examples {
+  background-color: rgb(15 23 42 / 82%);
+  border: 1px solid rgb(148 163 184 / 20%);
+  border-radius: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+}
+
+.other-examples h2 {
+  font-size: 1.15rem;
+  margin: 0 0 1rem;
+}
+
+.example-links,
+.user-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.example-links a,
+.user-links a {
+  border: 1px solid rgb(148 163 184 / 35%);
+  border-radius: 999px;
+  color: #dbeafe;
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+}
+
+.example-links a:hover,
+.user-links a:hover {
+  background-color: rgb(147 197 253 / 12%);
+  border-color: #93c5fd;
+}
+
+.example-links a:focus-visible,
+.user-links a:focus-visible {
+  outline: 2px solid #bfdbfe;
+  outline-offset: 3px;
+}
+
+.user-links-title {
+  color: #cbd5e1;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.user-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 700px) {
+  .news-task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-task-card {
+    min-height: 270px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-task-card {
+    transition: none;
+  }
+}
