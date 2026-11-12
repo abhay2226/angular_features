@@ -4,6 +4,25 @@
   padding: 1.5rem;
 }
 
+.news-sticky-header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+.news-heading {
+  padding: 0.5rem 0 0;
+}
+
+.news-heading h1 {
+  margin-top: 0;
+}
+
+.news-heading p {
+  margin-bottom: 0.75rem;
+}
+
 .news-status {
   background-color: #e8f5e9;
   border-left: 4px solid #2e7d32;
@@ -16,35 +35,193 @@
   border-left-color: #c62828;
 }
 
+.news-list-controls {
+  background-color: #fff;
+  border-bottom: 1px solid #d5d9de;
+  padding: 0.25rem 0.75rem;
+}
+
+.news-list-controls .news-status,
+.news-list-controls .page-controls {
+  margin: 0.5rem 0;
+}
+
+.news-status-loading {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
 .demo-error-button {
+  background-color: #c62828;
+  border: 1px solid #b71c1c;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
   margin: 0.5rem 0;
   padding: 0.45rem 0.75rem;
 }
 
-.story-list {
-  padding-left: 2rem;
+.demo-error-button:hover:not(:disabled) {
+  background-color: #b71c1c;
 }
 
-.story-list li {
-  border-bottom: 1px solid #d5d9de;
-  padding: 0.75rem 0;
+.demo-error-button:focus-visible {
+  outline: 3px solid #ef9a9a;
+  outline-offset: 2px;
 }
 
-.story-list h2 {
+.demo-error-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.loading-state {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  min-height: 2rem;
+}
+
+.loading-spinner {
+  animation: spin 0.75s linear infinite;
+  border: 3px solid #d5d9de;
+  border-radius: 50%;
+  border-top-color: #1565c0;
+  flex: 0 0 auto;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page-controls,
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.pagination {
+  background-color: #fff;
+  bottom: 0;
+  justify-content: center;
+  padding: 0.75rem;
+  position: sticky;
+  z-index: 1;
+}
+
+.pagination button,
+.page-controls select {
+  padding: 0.4rem 0.65rem;
+}
+
+.pagination-note {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.story-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  max-height: 65vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.25rem 0.75rem 0.5rem 0.25rem;
+}
+
+.story-card {
+  background-color: #fff;
+  border: 1px solid #d5d9de;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.story-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.story-card h2 {
   font-size: 1.1rem;
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.5rem;
+}
+
+.story-card h2 a {
+  color: inherit;
 }
 
 .story-details {
   color: #555;
   font-size: 0.9rem;
+  margin: 0 0 0.75rem;
+}
+
+.story-summary {
   margin: 0;
 }
 
 .story-image {
   display: block;
-  margin: 0.75rem 0;
-  max-height: 280px;
-  max-width: 100%;
+  height: 180px;
   object-fit: cover;
+  width: 100%;
+}
+
+.skeleton-card {
+  min-height: 300px;
+}
+
+.skeleton-image,
+.skeleton-line {
+  animation: shimmer 1.4s linear infinite;
+  background: linear-gradient(90deg, #eeeeee 25%, #f7f7f7 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+}
+
+.skeleton-image {
+  height: 180px;
+}
+
+.skeleton-line {
+  border-radius: 0.25rem;
+  display: block;
+  height: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-title {
+  height: 1.2rem;
+  width: 85%;
+}
+
+.skeleton-line-short {
+  width: 55%;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner,
+  .skeleton-image,
+  .skeleton-line {
+    animation: none;
+  }
 }
