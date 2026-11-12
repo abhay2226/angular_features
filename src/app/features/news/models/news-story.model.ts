@@ -9,8 +9,10 @@ export interface SpaceflightArticle {
 }
 
 export interface SpaceflightArticlesResponse {
+  count: number;
   results: SpaceflightArticle[];
   next: string | null;
+  previous: string | null;
 }
 
 export interface NewsStory {
@@ -21,4 +23,9 @@ export interface NewsStory {
   imageUrl: string | null;
   source: string;
   publishedAt: string;
+}
+
+export interface NewsArticlesPage {
+  stories: NewsStory[];
+  totalCount: number;
 }

@@ -1,14 +1,67 @@
 <main class="news-page">
-  <h1>Spaceflight news</h1>
-  <p>Recent articles from the public Spaceflight News API.</p>
-  <button type="button" class="demo-error-button" (click)="testBadRequest()" [disabled]="isLoading">
-    Test HTTP 400 error
-  </button>
+  <div class="news-sticky-header">
+    <header class="news-heading">
+      <h1>Spaceflight news</h1>
+      <p>Articles from the public Spaceflight News API, browsed a page at a time.</p>
+    </header>
+    <button
+      type="button"
+      class="demo-error-button"
+      (click)="testBadRequest()"
+      [disabled]="isLoading"
+    >
+      Test HTTP 400 error
+    </button>
+    @if (!isTestingError && !errorMessage && (isLoading || stories.length > 0)) {
+      <div class="news-list-controls">
+        @if (isLoading) {
+          <p class="news-status news-status-loading" role="status" aria-live="polite">
+            <span class="loading-spinner" aria-hidden="true"></span>
+            Loading up to {{ pageSize }} news stories...
+          </p>
+        } @else {
+          <p class="news-status" role="status">
+            Showing {{ firstStoryNumber }}–{{ lastStoryNumber }} of {{ totalStories }} articles.
+          </p>
+        }
+        <div class="page-controls">
+          <label for="page-size">Articles per page:</label>
+          <select
+            id="page-size"
+            [ngModel]="pageSize"
+            (ngModelChange)="onPageSizeChange($event)"
+            [disabled]="isLoading"
+          >
+            @for (size of pageSizeOptions; track size) {
+              <option [ngValue]="size">{{ size }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    }
+  </div>
 
   @if (isLoading) {
-    <p class="news-status" role="status">
-      {{ isTestingError ? 'Testing HTTP 400 response...' : 'Loading news stories...' }}
-    </p>
+    @if (isTestingError) {
+      <div class="loading-state" role="status" aria-live="polite" aria-busy="true">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <span>Testing HTTP 400 response...</span>
+      </div>
+    } @else {
+      <section class="story-grid story-grid-loading" aria-hidden="true">
+        @for (placeholder of [1, 2, 3, 4]; track placeholder) {
+          <article class="story-card skeleton-card">
+            <div class="skeleton-image"></div>
+            <div class="story-card-content">
+              <span class="skeleton-line skeleton-title"></span>
+              <span class="skeleton-line"></span>
+              <span class="skeleton-line skeleton-line-short"></span>
+              <span class="skeleton-line"></span>
+            </div>
+          </article>
+        }
+      </section>
+    }
   } @else if (errorMessage) {
     <div class="news-status error" role="alert">
       <p>{{ errorMessage }}</p>
@@ -20,11 +73,13 @@
   } @else if (stories.length === 0) {
     <p class="news-status" role="status">No stories are available right now.</p>
   } @else {
-    <p class="news-status" role="status">Loaded {{ stories.length }} stories.</p>
-    <ol class="story-list">
+    <section class="story-grid" aria-label="Spaceflight news articles">
       @for (story of stories; track story.id) {
-        <li>
-          <article>
+        <article class="story-card">
+          @if (story.imageUrl) {
+            <img class="story-image" [src]="story.imageUrl" [alt]="story.title" loading="lazy">
+          }
+          <div class="story-card-content">
             <h2>
               <a [href]="story.url" target="_blank" rel="noopener noreferrer">
                 {{ story.title }}
@@ -35,16 +90,30 @@
                 · {{ story.publishedAt | date: 'medium' }}
               }
             </p>
-            @if (story.imageUrl) {
-              <img class="story-image" [src]="story.imageUrl" [alt]="story.title" loading="lazy">
-            }
             @if (story.summary) {
-              <p>{{ story.summary }}</p>
+              <p class="story-summary">{{ story.summary }}</p>
             }
-          </article>
-        </li>
+          </div>
+        </article>
       }
-    </ol>
+    </section>
+    <nav class="pagination" aria-label="News article pagination">
+      <button type="button" (click)="previousPage()" [disabled]="isLoading || currentPage === 0">
+        Previous
+      </button>
+      <span aria-live="polite">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+      <button
+        type="button"
+        (click)="nextPage()"
+        [disabled]="isLoading || currentPage >= totalPages - 1"
+      >
+        Next
+      </button>
+    </nav>
+    <p class="pagination-note">
+      All {{ totalStories }} articles are available through these pages. Only the current page is
+      loaded, which keeps large datasets responsive and reduces memory and network use.
+    </p>
   }
 
   <a routerLink="/">Go back to home</a>
