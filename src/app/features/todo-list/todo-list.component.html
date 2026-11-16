@@ -1,0 +1,79 @@
+<main class="todo-page">
+  <div class="todo-shell">
+    <a class="home-button" routerLink="/">← Go back to home</a>
+
+    <header class="todo-header">
+      <h1>My todo list</h1>
+    </header>
+
+    <section class="todo-panel" aria-label="Todo list">
+      <form class="todo-form" (ngSubmit)="addTodo()">
+        <label class="visually-hidden" for="new-todo">New task</label>
+        <input
+          id="new-todo"
+          name="newTodoTitle"
+          type="text"
+          [(ngModel)]="newTodoTitle"
+          placeholder="What needs to get done?"
+          maxlength="160"
+          autocomplete="off"
+        >
+        <button type="submit" [disabled]="!newTodoTitle.trim()">Add task</button>
+      </form>
+
+      @if (storageError) {
+        <p class="storage-error" role="alert">{{ storageError }}</p>
+      }
+
+      @if (todos.length > 0) {
+        <ul class="todo-items">
+          @for (todo of todos; track todo.id) {
+            <li class="todo-item">
+              @if (editingTodoId === todo.id) {
+                <form class="edit-form" (ngSubmit)="saveEdit(todo.id)">
+                  <label class="visually-hidden" [for]="'edit-todo-' + todo.id">
+                    Edit task
+                  </label>
+                  <input
+                    [id]="'edit-todo-' + todo.id"
+                    [name]="'editTodoTitle-' + todo.id"
+                    type="text"
+                    [(ngModel)]="editTodoTitle"
+                    maxlength="160"
+                    required
+                  >
+                  <div class="todo-actions">
+                    <button class="edit-button" type="submit" [disabled]="!editTodoTitle.trim()">
+                      Save
+                    </button>
+                    <button class="delete-button" type="button" (click)="cancelEditing()">
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              } @else {
+                <span class="todo-title">{{ todo.title }}</span>
+                <div class="todo-actions">
+                  <button class="edit-button" type="button" (click)="startEditing(todo)">
+                    Edit
+                  </button>
+                  <button
+                    class="delete-button"
+                    type="button"
+                    [attr.aria-label]="'Delete ' + todo.title"
+                    (click)="removeTodo(todo.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              }
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty-state" role="status">Your list is empty. Add a task above to get started.</p>
+      }
+    </section>
+
+  </div>
+</main>

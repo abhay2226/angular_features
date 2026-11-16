@@ -48,6 +48,7 @@ import { RouterLink } from '@angular/router';
             <a routerLink="/examples/template-features">Template features</a>
             <a routerLink="/employee-data">Employee data</a>
             <a routerLink="/api-call">All users' posts</a>
+            <a routerLink="/todo-list">Todo list</a>
           </nav>
           <p class="user-links-title">Choose a user to view their posts:</p>
           <ul class="user-links">

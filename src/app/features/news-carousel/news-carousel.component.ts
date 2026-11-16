@@ -49,6 +49,28 @@ export class NewsCarouselComponent implements OnInit {
     );
   }
 
+  get markerIndexes(): number[] {
+    const markerCount = Math.min(4, this.stories.length);
+
+    return Array.from(
+      { length: markerCount },
+      (_, markerIndex) => Math.floor((markerIndex * this.stories.length) / markerCount),
+    );
+  }
+
+  get activeMarkerIndex(): number {
+    const markers = this.markerIndexes;
+    if (markers.length === 0) {
+      return -1;
+    }
+
+    const markerPosition = Math.min(
+      Math.floor((this.currentIndex * markers.length) / this.stories.length),
+      markers.length - 1,
+    );
+    return markers[markerPosition];
+  }
+
   ngOnInit(): void {
     this.loadPage();
   }
@@ -96,6 +118,12 @@ export class NewsCarouselComponent implements OnInit {
       this.currentIndex--;
     } else if (this.currentPage > 0) {
       this.loadPage(this.currentPage - 1, true);
+    }
+  }
+
+  goToStory(index: number): void {
+    if (!this.isLoading && index >= 0 && index < this.stories.length) {
+      this.currentIndex = index;
     }
   }
 }

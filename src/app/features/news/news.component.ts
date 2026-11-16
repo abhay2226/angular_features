@@ -22,7 +22,6 @@ export class NewsComponent implements OnInit {
   pageSize = 20;
   currentPage = 0;
   isLoading = true;
-  isTestingError = false;
   errorMessage: string | null = null;
   errorStatusCode: number | null = null;
 
@@ -45,7 +44,6 @@ export class NewsComponent implements OnInit {
   loadStories(page = this.currentPage): void {
     this.currentPage = page;
     this.isLoading = true;
-    this.isTestingError = false;
     this.errorMessage = null;
     this.errorStatusCode = null;
 
@@ -83,14 +81,12 @@ export class NewsComponent implements OnInit {
 
   testBadRequest(): void {
     this.isLoading = true;
-    this.isTestingError = true;
     this.errorMessage = null;
     this.errorStatusCode = null;
 
     this.newsService.testBadRequest().subscribe({
       next: () => {
         this.isLoading = false;
-        this.isTestingError = false;
         this.errorMessage = 'The test endpoint did not return the expected error.';
       },
       error: (error: unknown) => {
@@ -98,7 +94,6 @@ export class NewsComponent implements OnInit {
         this.errorMessage = 'The news error state is active.';
         this.errorStatusCode = error instanceof HttpErrorResponse ? error.status : null;
         this.isLoading = false;
-        this.isTestingError = false;
       },
     });
   }
