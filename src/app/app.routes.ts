@@ -8,6 +8,7 @@ import { HomeComponent } from './features/home/home.component';
 import { EmployeeDataComponent } from './features/employee-data/employee-data.component';
 import { NewsComponent } from './features/news/news.component';
 import { NewsCarouselComponent } from './features/news-carousel/news-carousel.component';
+import { TodoListComponent } from './features/todo-list/todo-list.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'employee-data', component: EmployeeDataComponent },
   { path: 'news', component: NewsComponent },
   { path: 'news-carousel', component: NewsCarouselComponent },
+  { path: 'todo-list', component: TodoListComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: '**', component: NotFoundComponent },
 ];

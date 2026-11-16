@@ -1,4 +1,5 @@
 <main class="news-page">
+  <a class="home-button" routerLink="/">← Go back to home</a>
   <div class="news-sticky-header">
     <header class="news-heading">
       <h1>Spaceflight news</h1>
@@ -12,56 +13,18 @@
     >
       Test HTTP 400 error
     </button>
-    @if (!isTestingError && !errorMessage && (isLoading || stories.length > 0)) {
-      <div class="news-list-controls">
-        @if (isLoading) {
-          <p class="news-status news-status-loading" role="status" aria-live="polite">
-            <span class="loading-spinner" aria-hidden="true"></span>
-            Loading up to {{ pageSize }} news stories...
-          </p>
-        } @else {
-          <p class="news-status" role="status">
-            Showing {{ firstStoryNumber }}–{{ lastStoryNumber }} of {{ totalStories }} articles.
-          </p>
-        }
-        <div class="page-controls">
-          <label for="page-size">Articles per page:</label>
-          <select
-            id="page-size"
-            [ngModel]="pageSize"
-            (ngModelChange)="onPageSizeChange($event)"
-            [disabled]="isLoading"
-          >
-            @for (size of pageSizeOptions; track size) {
-              <option [ngValue]="size">{{ size }}</option>
-            }
-          </select>
-        </div>
-      </div>
-    }
   </div>
 
   @if (isLoading) {
-    @if (isTestingError) {
-      <div class="loading-state" role="status" aria-live="polite" aria-busy="true">
-        <span class="loading-spinner" aria-hidden="true"></span>
-        <span>Testing HTTP 400 response...</span>
-      </div>
-    } @else {
-      <section class="story-grid story-grid-loading" aria-hidden="true">
-        @for (placeholder of [1, 2, 3, 4]; track placeholder) {
-          <article class="story-card skeleton-card">
-            <div class="skeleton-image"></div>
-            <div class="story-card-content">
-              <span class="skeleton-line skeleton-title"></span>
-              <span class="skeleton-line"></span>
-              <span class="skeleton-line skeleton-line-short"></span>
-              <span class="skeleton-line"></span>
-            </div>
-          </article>
-        }
-      </section>
-    }
+    <div
+      class="spaceflight-loading-overlay"
+      role="status"
+      aria-label="Loading news articles"
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <span class="spaceflight-loader" aria-hidden="true"></span>
+    </div>
   } @else if (errorMessage) {
     <div class="news-status error" role="alert">
       <p>{{ errorMessage }}</p>
@@ -97,6 +60,24 @@
         </article>
       }
     </section>
+    <div class="news-list-controls">
+      <p class="news-status" role="status">
+        Showing {{ firstStoryNumber }}–{{ lastStoryNumber }} of {{ totalStories }} articles.
+      </p>
+      <div class="page-controls">
+        <label for="page-size">Articles per page:</label>
+        <select
+          id="page-size"
+          [ngModel]="pageSize"
+          (ngModelChange)="onPageSizeChange($event)"
+          [disabled]="isLoading"
+        >
+          @for (size of pageSizeOptions; track size) {
+            <option [ngValue]="size">{{ size }}</option>
+          }
+        </select>
+      </div>
+    </div>
     <nav class="pagination" aria-label="News article pagination">
       <button type="button" (click)="previousPage()" [disabled]="isLoading || currentPage === 0">
         Previous
@@ -110,11 +91,5 @@
         Next
       </button>
     </nav>
-    <p class="pagination-note">
-      All {{ totalStories }} articles are available through these pages. Only the current page is
-      loaded, which keeps large datasets responsive and reduces memory and network use.
-    </p>
   }
-
-  <a routerLink="/">Go back to home</a>
 </main>

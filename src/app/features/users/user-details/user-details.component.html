@@ -1,3 +1,4 @@
+<a class="home-button" routerLink="/">← Go back to home</a>
 <h1>User details</h1>
 @if (user; as selectedUser) {
   <p>
@@ -7,4 +8,3 @@
 } @else {
   <p role="alert">No user was found for ID {{ userId }}.</p>
 }
-<a routerLink="/">Go back to home</a>

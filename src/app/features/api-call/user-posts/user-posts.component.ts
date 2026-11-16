@@ -10,6 +10,7 @@ import { ApiCallService } from '../services/api-call.service';
   imports: [RouterLink],
   template: `
     <main>
+      <a class="home-button" routerLink="/">← Go back to home</a>
       <h1>Posts from the sample API</h1>
 
       @if (isLoading) {
@@ -33,7 +34,6 @@ import { ApiCallService } from '../services/api-call.service';
       }
 
       <p><a routerLink="/feature/api">View posts from all users</a></p>
-      <a routerLink="/">Go back to home</a>
     </main>
   `,
   styles: `
